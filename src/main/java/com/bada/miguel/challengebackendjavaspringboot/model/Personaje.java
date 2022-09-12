@@ -1,5 +1,7 @@
 package com.bada.miguel.challengebackendjavaspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +20,7 @@ public class Personaje {
     private String historia;
 
     @ManyToMany(mappedBy = "personajesAsociados")
+    @JsonIgnoreProperties("personajesAsociados")
     private List<Film> filmaciones;
 
     public Personaje() {

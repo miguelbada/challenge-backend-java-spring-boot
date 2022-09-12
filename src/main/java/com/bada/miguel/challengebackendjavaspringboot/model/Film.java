@@ -1,5 +1,8 @@
 package com.bada.miguel.challengebackendjavaspringboot.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.awt.image.AreaAveragingScaleFilter;
 import java.sql.Date;
@@ -29,6 +32,7 @@ public class Film {
             name = "film_personaje",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "personaje_id"))
+    @JsonIgnoreProperties("filmaciones")
     private List<Personaje> personajesAsociados;
 
     public Film() {
@@ -89,6 +93,16 @@ public class Film {
 
     public void setPersonajesAsociados(List<Personaje> personajesAsociados) {
         this.personajesAsociados = personajesAsociados;
+    }
+
+    public void addPersonaje(Personaje personaje) {
+        if(!this.personajesAsociados.contains(personaje)) {
+            this.personajesAsociados.add(personaje);
+        }
+    }
+
+    public void deletePersonaje(Personaje personaje) {
+        this.personajesAsociados.remove(personaje);
     }
 
     @Override
