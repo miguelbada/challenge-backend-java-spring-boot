@@ -3,11 +3,13 @@ package com.bada.miguel.challengebackendjavaspringboot.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Transactional
 public class Personaje {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +21,7 @@ public class Personaje {
     private Double peso;
     private String historia;
 
-    @ManyToMany(mappedBy = "personajesAsociados")
+    @ManyToMany(mappedBy = "personajesAsociados", fetch = FetchType.EAGER)
     @JsonIgnoreProperties("personajesAsociados")
     private List<Film> filmaciones;
 
@@ -81,6 +83,12 @@ public class Personaje {
 
     public void setFilmaciones(List<Film> filmaciones) {
         this.filmaciones = filmaciones;
+    }
+
+    public void addFilmacion(Film film) {
+        if(!this.filmaciones.contains(film)) {
+            this.filmaciones.add(film);
+        }
     }
 
     @Override

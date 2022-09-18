@@ -1,10 +1,9 @@
 package com.bada.miguel.challengebackendjavaspringboot.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import javax.persistence.*;
-import java.awt.image.AreaAveragingScaleFilter;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +24,8 @@ public class Film {
     @Basic
     private Date fechaCreacion;
 
+    @Min(1)
+    @Max(5)
     private Integer calificacion;
 
     @ManyToMany(cascade = CascadeType.ALL)

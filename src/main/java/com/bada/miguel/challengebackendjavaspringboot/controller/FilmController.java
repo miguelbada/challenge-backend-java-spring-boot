@@ -5,6 +5,8 @@ import com.bada.miguel.challengebackendjavaspringboot.service.FilmService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -14,7 +16,7 @@ public class FilmController {
     private FilmService service;
 
     @PostMapping("/save")
-    public ResponseEntity<Film> saveFilm(@RequestBody Film film) {
+    public ResponseEntity<Film> saveFilm(@Valid @RequestBody Film film) {
         return ResponseEntity.ok().body(service.saveFilm(film));
     }
 

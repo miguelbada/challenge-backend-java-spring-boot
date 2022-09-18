@@ -3,12 +3,15 @@ package com.bada.miguel.challengebackendjavaspringboot.model.Dto;
 import com.bada.miguel.challengebackendjavaspringboot.model.Film;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.sql.Date;
-
 import static org.junit.Assert.assertEquals;
 
+@SpringBootTest
 public class FilmDtoTest {
     private ModelMapper modelMapper;
     private Film film;

@@ -96,8 +96,10 @@ public class FilmServiceImpl implements FilmService {
             Film film = optioalFilm.get();
             Personaje personaje = optionalPersonaje.get();
 
+            personaje.addFilmacion(film);
             film.addPersonaje(personaje);
             repository.save(film);
+            personajeRepository.save(personaje);
 
             return film;
         } else {

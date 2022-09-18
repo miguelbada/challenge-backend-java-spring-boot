@@ -3,9 +3,7 @@ package com.bada.miguel.challengebackendjavaspringboot.service.impl;
 import com.bada.miguel.challengebackendjavaspringboot.model.Genero;
 import com.bada.miguel.challengebackendjavaspringboot.repository.GeneroRepository;
 import com.bada.miguel.challengebackendjavaspringboot.service.GeneroService;
-import com.sun.org.apache.bcel.internal.generic.ARETURN;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Optionals;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

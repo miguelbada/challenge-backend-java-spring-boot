@@ -1,39 +1,45 @@
 package com.bada.miguel.challengebackendjavaspringboot.model;
 
+import com.bada.miguel.challengebackendjavaspringboot.service.PersonajeService;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class PersonajeTest {
-    private Personaje Chris = new Personaje();
-    //private Pelicula thorRagnarok = new Pelicula();
-   // private Serie got = new Serie();
+
+    @Autowired
+    PersonajeService service;
+
+    private Personaje chris;
 
     @Before
     public void setUp() {
-        Chris.setImagen("https://upload.wikimedia.org/wikipedia/commons/e/e8/Chris_Hemsworth_by_Gage_Skidmore_2_%28cropped%29.jpg");
-        Chris.setNombre("Chris Hemsworth");
-        Chris.setEdad(39);
-        Chris.setPeso(91.0);
-        Chris.setHistoria("Conocido simplemente como Chris Hemsworth, es un actor, actor de voz y productor australiano.");
+        chris = new Personaje();
+        chris.setImagen("https://upload.wikimedia.org/wikipedia/commons/e/e8/Chris_Hemsworth_by_Gage_Skidmore_2_%28cropped%29.jpg");
+        chris.setNombre("Chris Hemsworth");
+        chris.setEdad(39);
+        chris.setPeso(91.0);
+        chris.setHistoria("Conocido simplemente como Chris Hemsworth, es un actor, actor de voz y productor australiano.");
 
-        //thorRagnarok.setImagen("https://pics.filmaffinity.com/thor_ragnarok-115636540-mmed.jpg");
-        //got.setImagen("https://pics.filmaffinity.com/game_of_thrones-293142110-large.jpg");
     }
 
     @Test
     public void creacionDePersonaje() {
+        Personaje personajeSaved = service.savePersonaje(chris);
 
-        assertEquals("El link de la imagen debería ser ", "https://upload.wikimedia.org/wikipedia/commons/e/e8/Chris_Hemsworth_by_Gage_Skidmore_2_%28cropped%29.jpg", Chris.getImagen());
-        assertEquals("El nombre debería ser ", "Chris Hemsworth", Chris.getNombre());
-        assertEquals("La edad debería ser ", 39, Chris.getEdad(), 0.0);
-        assertEquals("El peso debería ser ", 91.0,Chris.getPeso(), 0.0);
-        assertEquals("La historia debería ser ", "Conocido simplemente como Chris Hemsworth, es un actor, actor de voz y productor australiano.", Chris.getHistoria());
+        assertEquals(personajeSaved.getImagen(), chris.getImagen());
+        assertEquals(personajeSaved.getNombre(), chris.getNombre());
+        assertEquals( personajeSaved.getEdad(), chris.getEdad(), 0.0);
+        assertEquals(personajeSaved.getPeso(), chris.getPeso(), 0.0);
+        assertEquals( personajeSaved.getHistoria(), chris.getHistoria());
+
+        service.deletePersonaje(personajeSaved.getId());
     }
 
-    @Test
-    public void agragarUnaPelicula() {
-
-    }
 }
